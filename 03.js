@@ -19,13 +19,13 @@ class Mahasiswa {
 class Organisasi extends Mahasiswa {
   constructor(nama, nim, jurusan, namaOrganisasi, jabatan) {
     super(nama, nim, jurusan);
-    this.namaOrganisasi = namaOrganisasi
+    this.namaOrganisasi = namaOrganisasi;
     this.jabatan = jabatan;
   }
 
-  displayOrganisai() {
+  displayOrganisasi() {
     console.log(
-      `Mahasiswa: ${this.nama} (${this.nim} ${this.jurusan}, Organisasi: ${this.namaOrganisasi}, Jabatan: ${this.jabatan}`
+      `Mahasiswa: ${this.nama} (${this.nim}) ${this.jurusan}, Organisasi: ${this.namaOrganisasi}, Jabatan: ${this.jabatan}`
     );
   }
 }
@@ -37,7 +37,7 @@ class Alumni extends Mahasiswa {
   }
   displayAlumni(){
     console.log(
-      `Alumni: ${this.name} (${this.nim}) ${this.jurusan}, Lulus: ${this.tahunLulus}, Pekerjaan: ${this.pekerjaan}
+      `Alumni: ${this.nama} (${this.nim}) ${this.jurusan}, Lulus: ${this.tahunLulus}, Pekerjaan: ${this.pekerjaan}`
     );
   }
 }
