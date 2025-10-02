@@ -1,5 +1,5 @@
 class Mahasiswa {
-  constructor(nama, nim, nilai) {
+  constructor(nama, kelas, prodi, nim, nilai) {
     this.nama = nama; // Atribut publik
     this.kelas = kelas; // Atribut publik
     this.prodi = prodi; // Atribut publik
@@ -21,11 +21,11 @@ class Mahasiswa {
 let mhs1 = new Mahasiswa("Tiara", "ip241", "informatika", "0064", 85);
 let mhs2 = new Mahasiswa("widya", "mp241", "informasi", "0457", 70);
 
-console.log(mhs1.nama, "-', mhs1.kelas,"-", mhs1.prodi, mhs1.getnim(), "-", mhs1.nilai);
-console.log(mhs2.nama, "-', mhs2.kelas,"-", mhs2.prodi, mhs2.getnim(), "-", mhs2.nilai);
+console.log(mhs1.nama, "-", mhs1.kelas,"-", mhs1.prodi, mhs1.getNim(), "-", mhs1.nilai);
+console.log(mhs2.nama, "-", mhs2.kelas,"-", mhs2.prodi, mhs2.getNim(), "-", mhs2.nilai);
             
 mhs1.setNim("0055");
 mhs2.setNim("0234");
 
-console.log(mhs1.nama, "-', mhs1.getnim(), "-", mhs1.nilai;
-console.log(mhs2.nama, "-', mhs2.getnim(), "-", mhs2.nilai;
+console.log(mhs1.nama, "-", mhs1.kelas,"-", mhs1.prodi, mhs1.getNim(), "-", mhs1.nilai);
+console.log(mhs2.nama, "-", mhs2.kelas,"-", mhs2.prodi, mhs2.getNim(), "-", mhs2.nilai);
