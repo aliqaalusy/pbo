@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Aplikasi Login</title>
+
+<style>
+/* ===== GALAXY BACKGROUND ===== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 1px, transparent 2px),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 1px, transparent 2px),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.1) 1px, transparent 2px),
+    linear-gradient(135deg, #1b0033, #3a0a6a, #12002b);
+  background-size: 200px 200px, 300px 300px, 250px 250px, cover;
+}
+
+/* ===== CARD ===== */
+.box {
+  background: rgba(30, 10, 60, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 32px 26px;
+  width: 320px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(180,120,255,0.4);
+  text-align: center;
+  color: #fff;
+}
+
+/* ===== TITLE ===== */
+h2 {
+  margin-bottom: 18px;
+  color: #e8d9ff;
+}
+
+/* ===== INPUT ===== */
+input {
+  width: 100%;
+  padding: 11px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #6f42c1;
+  font-size: 14px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  outline: none;
+}
+
+input::placeholder {
+  color: #cbb6ff;
+}
+
+input:focus {
+  border-color: #b88cff;
+  box-shadow: 0 0 10px rgba(184,140,255,0.7);
+}
+
+/* ===== BUTTON BASE ===== */
+button {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
+
+/* ===== LOGIN BUTTON ===== */
+#loginBtn {
+  margin-top: 14px;
+  background: linear-gradient(90deg, #9b5cff, #c77dff);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(180,120,255,0.6);
+}
+
+#loginBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(200,150,255,0.9);
+}
+
+#loginBtn:active {
+  transform: scale(0.97);
+}
+
+/* ===== CANCEL BUTTON ===== */
+#cancelBtn {
+  margin-top: 8px;
+  background: rgba(255,255,255,0.15);
+  color: #ddd;
+}
+
+#cancelBtn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ===== LOGOUT BUTTON ===== */
+#logoutBtn {
+  margin-top: 18px;
+  background: linear-gradient(90deg, #ff4d6d, #ff758f);
+  color: white;
+  box-shadow: 0 0 15px rgba(255,100,130,0.6);
+}
+
+#logoutBtn:hover {
+  box-shadow: 0 0 25px rgba(255,120,150,0.9);
+}
+
+/* ===== USER PAGE ===== */
+.user-info p {
+  color: #e0d4ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="app"></div>
+
+<script>
+class LoginApp {
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+    this.initData();
+    this.renderLogin();
+  }
+
+  initData() {
+    if (!localStorage.getItem('users')) {
+      const users = [
+        { username: 'admin', password: '12345' },
+        { username: 'user', password: 'user123' }
+      ];
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+  }
+
+  renderLogin() {
+    this.container.innerHTML = `
+      <h2>🌌 Galaxy Login</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button id="loginBtn">Login</button>
+      <button id="cancelBtn">Cancel</button>
+    `;
+
+    document.getElementById('loginBtn')
+      .addEventListener('click', () => this.login());
+
+    document.getElementById('cancelBtn')
+      .addEventListener('click', () => this.cancel());
+  }
+
+  login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const users = JSON.parse(localStorage.getItem('users'));
+    const found = users.find(
+      user => user.username === username && user.password === password
+    );
+
+    if (!found) {
+      alert('Ups! Username atau password salah.');
+    } else {
+      this.renderUserPage(found.username);
+    }
+  }
+
+  renderUserPage(username) {
+    this.container.innerHTML = `
+      <div class="user-info">
+        <h2>✨ Login Berhasil</h2>
+        <p>Halo <b>${username}</b>, selamat datang di sistem</p>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    `;
+
+    document.getElementById('logoutBtn')
+      .addEventListener('click', () => this.logout());
+  }
+
+  logout() {
+    this.renderLogin();
+  }
+
+  cancel() {
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+  }
+}
+
+new LoginApp('app');
+</script>
+
+</body>
+</html>
